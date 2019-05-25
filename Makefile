@@ -1,14 +1,14 @@
 CC=gcc
 CXX=g++
 
-all: do_math.bin hook
+all: do_math.bin hook.o
 
 do_math.bin: do_math.c
 	$(CC) $^ -g3 -o $@ -lm
 	chmod u+rx $@
 
-hook: hook.c
-	$(CC) -Os -nostdlib -nodefaultlibs -fPIC -Wl,-shared $^ -o $@
+hook.o: hook.c
+	$(CC) -nostdlib -nodefaultlibs -fPIC -c $^ -o $@
 
 run: all
 	unset LD_LIBRARY_PATH
